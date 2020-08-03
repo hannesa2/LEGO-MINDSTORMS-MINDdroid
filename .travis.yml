@@ -27,7 +27,6 @@ install:
 #  - ./wait_for_emulator.sh
 
 before_script:
-  - cd android
   - ./signing/decrypt.sh
 
 script:
