@@ -3,11 +3,11 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion sdkVersion
+    compileSdkVersion 29
 
     defaultConfig {
-        minSdkVersion minSdk
-        targetSdkVersion sdkVersion
+        minSdkVersion 21
+        targetSdkVersion 29
         versionCode getGitCommitCount()
         versionName getVersion()
 

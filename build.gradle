@@ -17,8 +17,6 @@ ext {
     revision = getGitCommitHash()
     versionRevision = getGitCommitCount()
 
-    sdkVersion = 29
-    minSdk = 21
     javaVersion = JavaVersion.VERSION_1_8
 }
 
