@@ -11,7 +11,7 @@ android {
         versionCode getGitCommitCount()
         versionName getVersion()
 
-        buildConfigField "String", 'GIT_REPOSITORY', "\"" + getGitRepository() + "\""
+        buildConfigField "String", 'GIT_REPOSITORY', "\"" + getGitOriginRemote() + "\""
     }
 
     signingConfigs {
@@ -75,11 +75,6 @@ dependencies {
     implementation "com.github.hannesa2:githubAppUpdate:1.2"
 }
 
-static def getGitCommitCount() {
-    def process = "git rev-list HEAD --count".execute()
-    return process.text.toInteger()
-}
-
 static def getGitOriginRemote() {
     def process = "git remote -v".execute()
     def values = process.text.toString().trim().split("\\r\\n|\\n|\\r")
@@ -88,7 +83,11 @@ static def getGitOriginRemote() {
     return found.replace("origin", "").replace("(push)", "").replace(".git", "").trim()
 }
 
-static def getGitRepository() {
-    def token = getGitOriginRemote().split("/")
-    return token[4]
+static def getGitCommitCount() {
+    try {
+        return 'git rev-list --first-parent --count HEAD'.execute().text.trim() as Integer
+    }
+    catch (ignored) {
+        return 0
+    }
 }

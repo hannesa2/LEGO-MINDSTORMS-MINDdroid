@@ -14,9 +14,6 @@ buildscript {
 }
 
 ext {
-    revision = getGitCommitHash()
-    versionRevision = getGitCommitCount()
-
     javaVersion = JavaVersion.VERSION_1_8
 }
 
@@ -27,22 +24,4 @@ allprojects {
         maven { url 'https://jitpack.io' }
     }
 
-}
-
-private static def getGitCommitCount() {
-    try {
-        return 'git rev-list --first-parent --count HEAD'.execute().text.trim() as Integer
-    }
-    catch (ignored) {
-        return 0
-    }
-}
-
-private static def getGitCommitHash() {
-    try {
-        return 'git rev-parse --short HEAD'.execute().text.trim()
-    }
-    catch (ignored) {
-        return null
-    }
 }
