@@ -11,7 +11,6 @@ android {
         versionCode getGitCommitCount()
         versionName getVersion()
 
-        buildConfigField "String", 'GIT_USER', "\"" + getGitUser() + "\""
         buildConfigField "String", 'GIT_REPOSITORY', "\"" + getGitRepository() + "\""
     }
 
@@ -73,7 +72,7 @@ dependencies {
     implementation "androidx.annotation:annotation:1.1.0"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    implementation 'com.github.hannesa2:githubAppUpdate:0.6'
+    implementation "com.github.hannesa2:githubAppUpdate:1.2"
 }
 
 static def getGitCommitCount() {
@@ -87,11 +86,6 @@ static def getGitOriginRemote() {
 
     def found = values.find { it.startsWith("origin") && it.endsWith("(push)") }
     return found.replace("origin", "").replace("(push)", "").replace(".git", "").trim()
-}
-
-static def getGitUser() {
-    def token = getGitOriginRemote().split("/")
-    return token[3]
 }
 
 static def getGitRepository() {
